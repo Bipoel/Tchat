@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var server = require ('http').createServer(app);
 
+
 const io = require ('socket.io')(server);
 users = [];
 connections = [];
@@ -13,15 +14,20 @@ app.get('/', function(req, res){
 
 });
 
+
+
+
+app.use(express.static('public'));
+// app.use(express.static(__dirname + '/public'));
+
+
 io.sockets.on('connection', function(socket) {
     connections.push(socket);
     console.log('Connected: % sockets connected', connections.length);
 
 //Connexion
 
-
-
-    //Disconnected
+//Disconnected
     socket.on('disconnect', function(data){
         users.splice(users.indexOf(socket.username), 1);
         updateUsernames();
@@ -36,7 +42,9 @@ io.sockets.on('connection', function(socket) {
         io.sockets.emit('new message', {msg: data, user: socket.username});
     });
 
-  
+
+   
+    
     //// New user
     socket.on('new user', function(data, callback){
         console.log(data)

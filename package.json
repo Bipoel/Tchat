@@ -9,7 +9,8 @@
   "author": "Deedee",
   "license": "ISC",
   "dependencies": {
-    "socket.io": "*",
-    "express": "*"
+    "express": "*",
+    "moment": "^2.29.1",
+    "socket.io": "*"
   }
 }
